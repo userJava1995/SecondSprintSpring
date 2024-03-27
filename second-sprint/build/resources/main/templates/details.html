@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="main.html">
+
+    <div layout:fragment="contentFragment">
+        <form class="mt-3 container w-50" th:action="'/' + ${request.getId()}" method="post">
+
+            <div class="text-center" th:if="${!request.isHandled()}" style="color: red">
+                *** Новая необработанная заявка ***
+            </div>
+
+            <div class="text-center" th:if="${request.isHandled()}" style="color: green">
+                Обработанная заявка
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">ФИО:</label>
+                <input class="form-control" placeholder="ФИО" th:value="${request.getUserName()}" name="userName" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Курс:</label>
+                <select name="courseName" disabled>
+                    <option th:value="${request.getCourseName()}" th:text="${request.getCourseName()}" selected></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Номер телефона:</label>
+                <input class="form-control" th:value="${request.getPhone()}" name="phone" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Комментарий:</label>
+                <textarea class="form-control" rows="3" th:text="${request.getCommentary()}" name="commentary" disabled></textarea>
+            </div>
+            <button class="btn btn-success mt-3" th:if="${!request.isHandled()}">Обработать заявку</button>
+            <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Удалить заявку
+            </button>
+        </form>
+
+        <form th:action="'/' + ${request.getId()} + '/delete'" method="post">
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Окно удаления</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Вы действительно хотите удалить заявку?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            <button class="btn btn-danger">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</html>

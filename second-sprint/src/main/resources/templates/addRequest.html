@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="main.html">
+
+    <form class="mt-3 container w-50" action="/add" method="post" layout:fragment="contentFragment">
+
+        <div class="alert alert-danger" role="alert" th:if="${param.badRequest}">
+            Incorrect Inputs!!!
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">ФИО:</label>
+            <input class="form-control" placeholder="ФИО" name="userName" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Курс:</label>
+            <select name="courseName" required>
+                <option value="Java Start">Java Start</option>
+                <option value="Java Core">Java Core</option>
+                <option value="Java EE">Java EE</option>
+                <option value="Spring Boot">Spring Boot</option>
+                <option value="Golang Start">Golang Start</option>
+                <option value="Golang Core">Golang Core</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Номер телефона:</label>
+            <input class="form-control" placeholder="+7(7__)______" name="phone" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Комментарий:</label>
+            <textarea class="form-control" rows="3" placeholder="Комментарий" name="commentary"></textarea>
+        </div>
+        <button class="btn btn-success mt-3">Добавить заявку</button>
+    </form>
+
+</html>
